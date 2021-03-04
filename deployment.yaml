@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitnami-spark-streaming
+  labels:
+    app: bitnami-spark-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitnami-spark-streaming
+  template:
+    metadata:
+      labels:
+        app: bitnami-spark-streaming
+    spec:
+      containers:
+      - name: bitnami-spark-streaming
+        imagePullPolicy: IfNotPresent
+        image: debatosh99/spark-stream:2.0
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+          - name: cluster
+            containerPort: 7077
+          - name: kafka
+            containerPort: 9092
+          - name: mysql
+            containerPort: 3306
+            protocol: TCP
+        volumeMounts:
+          - mountPath: /opt/bitnami/spark/debu
+            name: task-pv-storage
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim

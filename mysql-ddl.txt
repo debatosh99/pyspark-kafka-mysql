@@ -1,0 +1,18 @@
+CREATE TABLE transaction_geoip(
+	cust_id VARCHAR(164),
+	public_ip VARCHAR(164),
+	ip VARCHAR(164),
+	browser_id VARCHAR(164),
+	device_id VARCHAR(164),
+	event_timestamp VARCHAR(164),
+	time_spent VARCHAR(164),
+	webpage_name VARCHAR(164),
+	url VARCHAR(164),
+	timestamp VARCHAR(164),
+	country_code VARCHAR(164),
+	country_name VARCHAR(164),
+	region_name VARCHAR(164),
+	city_name VARCHAR(164),
+	zip_code VARCHAR(164),
+	ip_from VARCHAR(164)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

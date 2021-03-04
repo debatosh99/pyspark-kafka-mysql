@@ -1,0 +1,37 @@
+##############################################################
+Additional jars needed for pyspark code for kafka and mysql
+##############################################################
+
+org.apache.commons_commons-pool2-2.6.2.jar,
+org.apache.kafka_kafka-clients-2.4.1.jar,
+org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.0.jar,
+org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.0.jar,
+mysql-connector-java-5.1.38.jar
+
+##############################################################
+pyspark submit from local
+##############################################################
+
+./spark-submit --master local[*] --jars /home/debatosh/pyspark-kafka-mysql-jars/org.apache.commons_commons-pool2-2.6.2.jar,/home/debatosh/pyspark-kafka-mysql-jars/org.apache.kafka_kafka-clients-2.4.1.jar,/home/debatosh/pyspark-kafka-mysql-jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.0.jar,/home/debatosh/pyspark-kafka-mysql-jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.0.jar,/home/debatosh/projects-debu/spark-kafka-1/spark-shell-jars/mysql-connector-java-5.1.38.jar /home/debatosh/projects-debu/spark-kafka-1/pyspark-mysql.py
+
+##############################################################
+pyspark submit from bitnami container
+##############################################################
+
+$SPARK_HOME/bin/spark-submit \
+--master local[*] \
+--jars file:///opt/bitnami/spark/debu/org.apache.commons_commons-pool2-2.6.2.jar,file:///opt/bitnami/spark/debu/org.apache.kafka_kafka-clients-2.4.1.jar,file:///opt/bitnami/spark/debu/mysql-connector-java-8.0.21.jar,file:///opt/bitnami/spark/debu/spark-sql-kafka-0-10_2.12-3.0.1.jar,file:///opt/bitnami/spark/debu/spark-token-provider-kafka-0-10_2.12-3.0.1.jar \
+file:///opt/bitnami/spark/debu/pyspark-mysql.py
+
+#############################################################
+Test with mysql java client
+#############################################################
+
+Also to debug and test mysql connection use below java code and you can also run this mysql java code from inside a pvc volume mounted directory from inside the bitnami spark container:-
+
+java -cp /home/debatosh/bitnami-charts/pv-requirement/mysql-connector-java-8.0.21.jar /home/debatosh/bitnami-charts/pv-requirement/Test.java
+
+Also to run and test this mysql java code from inside bitnami container, you need to first javac compile then generate .class file then run the code using java.
+
+javac -cp ".:/opt/bitnami/spark/debu/mysql-connector-java-5.1.38.jar" Test.java
+java -cp ".:/opt/bitnami/spark/debu/mysql-connector-java-5.1.38.jar" Test
